@@ -1,37 +1,39 @@
-# GeoAgent-VLM: Tool-Augmented Remote Sensing Reasoning
+# GeoAgent: Overcoming Step Degradation in Geospatial VLMs
+
+**GitHub Repository:** [https://github.com/Ali-Abdullah-1921/DL-project](https://github.com/Ali-Abdullah-1921/DL-project)
 
 ## Project Overview
-This project explores hallucination reduction and multi-hop reasoning improvement in Vision Language Models (VLMs) for remote sensing imagery. 
+This project explores hallucination reduction and multi-hop reasoning improvement in Vision Language Models (VLMs) applied to remote sensing imagery. 
 
-Through an iterative development process, the project evolved to the final "V2" architecture: an advanced Agentic AI system utilizing **Qwen2-VL**, **Oracle GeoTools**, and **Recurrent Visual Attention Masking (RVAM)**. Crucially, this repository features a comprehensive **Integrity Testing Suite** designed to mathematically prove that the model's spatial reasoning is genuine and not the result of linguistic hallucination or metric gaming.
+Through an iterative development process, the project evolved from standard VQA baselines to an advanced Agentic AI system. The final "V2" architecture utilizes **Qwen2-VL** (for Naive Dynamic Resolution) paired with an agentic ReAct-style loop, **Oracle GeoTools**, and **Gaussian Recurrent Visual Attention Masking (RVAM)** to physically ground the model's spatial logic and eliminate "step degradation."
 
-## Breakthrough Results
-The V2 Architecture effectively eliminates the "step degradation" bottleneck. By mathematically isolating the VLM's logic and using RVAM to tether attention, the GeoAgent achieved massive performance gains over the baseline:
-* **2-Hop Accuracy:** 89.5% (Baseline: 57.0%)
-* **3-Hop Accuracy:** 83.0% (Baseline: 59.5%)
-* **4-Hop Accuracy:** 84.5% (Baseline: 53.0%)
+## Project Progression & Methodology
+The project and this repository are structured around three core development phases:
 
-## Methodology & Notebook Progression
-The included Jupyter Notebook (`deep-learning-project-baseline.ipynb`) contains the complete research progression:
+### Task 3: Baseline
+- **Execution:** Evaluated a standard **LLaVA-1.5 (7B)** model on a custom, mathematically balanced 600-question multi-hop benchmark generated from xView GeoJSON data.
+- **Findings:** The baseline suffered heavily from linguistic hallucinations. A "Blind Stress Test" (using black images) proved the model was exploiting language priors rather than visual evidence.
 
-### 1. The V2 GeoAgent Pipeline
-- **Architecture:** **Qwen2-VL-7B-Instruct** for superior instruction following and dynamic resolution scaling.
-- **Tools:** **Oracle GeoTools** (derived directly from ground-truth GeoJSON) to isolate the VLM's logical reasoning from perceptual detector failures.
-- **Masking (RVAM):** **Gaussian Blurs** scramble discriminative object features while preserving adjacent terrain, physically forcing the model's attention to shift.
+### Task 4: First Improvement
+- **Execution:** Introduced a **ReAct Agentic Framework** utilizing LLaVA-1.5 alongside specialist vision tools (**YOLOv8-OBB** and **SAM**). We also introduced an early version of RVAM using solid black boxes to mask objects.
+- **Findings:** While this grounded the model, it introduced a *Compounding Error Penalty*. If YOLO missed a 5-pixel car due to noise, the agent failed the logic task. Furthermore, solid black masks caused destructive spatial interference by hiding adjacent terrain.
 
-### 2. The Integrity & Validation Testing Suite (Core Focus)
+### Task 5: Second Improvement (Final Architecture)
+- **Execution:** We transitioned to **Qwen2-VL-7B-Instruct** for superior instruction following. To isolate true reasoning from predictive detector failures, we replaced YOLO with **Oracle GeoTools** (derived directly from ground-truth GeoJSON). We also upgraded RVAM to use **Gaussian Blurs**, scrambling discriminative features without destroying spatial context.
+- **Results:** This architecture achieved massive performance gains, improving strict 4-hop spatial reasoning accuracy from **53.0% (Baseline) to 84.5% (GeoAgent)**.
+
+## Integrity Testing Suite (Validation)
 To confirm the pipeline is working correctly and the results are scientifically valid, the notebook runs several automated audits:
-- **Blind Stress Test (Hallucination Baseline):** Feeds the agent a completely black image to ensure it correctly fails (proving it doesn't just memorize questions).
-- **Scoring Rigidity (Poisoned Data Test):** Inverts the ground truth to guarantee the regex-based grader isn't "leaking" or handing out false positives.
-- **Reasoning Bypass Audit:** Scans the agent's internal thought process to flag "Lucky Guesses"—instances where the model got the right answer but bypassed tool usage.
-- **Agent Psychoanalysis:** Automatically isolates and prints the specific step-by-step reasoning traces of failed questions for qualitative debugging.
+- **Blind Stress Test:** Feeds the agent a completely black image to ensure it correctly fails.
+- **Scoring Rigidity (Poisoned Data Test):** Inverts the ground truth to guarantee the regex-based grader isn't handing out false positives.
+- **Reasoning Bypass Audit:** Scans the agent's internal thought process to flag "Lucky Guesses" (correct answers achieved without tool calls).
 
 ## Required Datasets & Setup
-To run this notebook in Kaggle, attach the following datasets to your environment:
-1. **xView Dataset (Images & Annotations):** [https://www.kaggle.com/datasets/hassanmojab/xview-dataset](https://www.kaggle.com/datasets/hassanmojab/xview-dataset)
+To run the included notebook (`deep-learning-project-baseline.ipynb`) in Kaggle, attach the following datasets:
+1. **xView Dataset:** [https://www.kaggle.com/datasets/hassanmojab/xview-dataset](https://www.kaggle.com/datasets/hassanmojab/xview-dataset)
 2. **Project Weights & Results Cache:** [https://www.kaggle.com/datasets/mohammadaliabdullah/weights](https://www.kaggle.com/datasets/mohammadaliabdullah/weights)
 
 ## Authors
-- Muhammad Sheis Hussain
-- Ali Abdullah
-- Manal Haider
+- Mohammad Ali Abdullah (26100241)
+- Muhammad Sheis Hussain (26100220)
+- Manal Haider (27100024)
