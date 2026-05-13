@@ -28,8 +28,13 @@ To confirm the pipeline is working correctly and the results are scientifically 
 - **Scoring Rigidity (Poisoned Data Test):** Inverts the ground truth to guarantee the regex-based grader isn't handing out false positives.
 - **Reasoning Bypass Audit:** Scans the agent's internal thought process to flag "Lucky Guesses" (correct answers achieved without tool calls).
 
+## Repository Structure & Notebook Guide
+Please note the specific purpose of the Jupyter notebooks included in this repository:
+- **`45_26100241_26100220_27100024 (2).ipynb` (Final Notebook):** This is the primary and most up-to-date notebook. It contains the complete code for the final V2 architecture, the integrity testing suite, and **all detailed markdown explanations for the cells**. 
+- **Baseline & First Improvement Notebooks:** These earlier iteration notebooks are included in the repository *strictly for documentation and to display their execution outputs at the end of the files*. For code walkthroughs, explanations, and the definitive pipeline, refer exclusively to the final notebook above.
+
 ## Required Datasets & Setup
-To run the included notebook (`deep-learning-project-baseline.ipynb`) in Kaggle, attach the following datasets:
+To run the final notebook (`45_26100241_26100220_27100024 (2).ipynb`) in Kaggle, attach the following datasets:
 1. **xView Dataset:** [https://www.kaggle.com/datasets/hassanmojab/xview-dataset](https://www.kaggle.com/datasets/hassanmojab/xview-dataset)
 2. **Project Weights & Results Cache:** [https://www.kaggle.com/datasets/mohammadaliabdullah/weights](https://www.kaggle.com/datasets/mohammadaliabdullah/weights)
 
