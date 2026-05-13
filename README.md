@@ -5,6 +5,12 @@ This project explores hallucination reduction and multi-hop reasoning improvemen
 
 Through an iterative development process, the project evolved from standard VQA baselines to an advanced Agentic AI system. The final "V2" architecture utilizes **Qwen2-VL** (for Naive Dynamic Resolution) paired with an agentic ReAct-style loop, **Oracle GeoTools**, and **Recurrent Visual Attention Masking (RVAM)** using Gaussian blurs to physically ground the model's spatial logic.
 
+## Breakthrough Results
+The V2 Architecture effectively eliminates the "step degradation" bottleneck typically seen in spatial reasoning. By mathematically isolating the VLM's logic and using RVAM to tether attention, the GeoAgent achieved massive performance gains over the baseline:
+* **2-Hop Accuracy:** 89.5% (Baseline: 57.0%)
+* **3-Hop Accuracy:** 83.0% (Baseline: 59.5%)
+* **4-Hop Accuracy:** 84.5% (Baseline: 53.0%)
+
 ## Methodology & Notebook Progression
 The included Jupyter Notebook (`deep-learning-project-baseline.ipynb`) contains the complete research progression:
 
@@ -25,17 +31,8 @@ The included Jupyter Notebook (`deep-learning-project-baseline.ipynb`) contains 
 
 ## Required Datasets & Setup
 To run this notebook in Kaggle, attach the following datasets to your environment:
-1. **xView Dataset (Images & Annotations):**
-   - URL: [https://www.kaggle.com/datasets/hassanmojab/xview-dataset](https://www.kaggle.com/datasets/hassanmojab/xview-dataset)
-2. **Project Weights & Results Cache:**
-   - URL: [https://www.kaggle.com/datasets/mohammadaliabdullah/weights](https://www.kaggle.com/datasets/mohammadaliabdullah/weights)
-
-## Hardware Requirements
-- **Environment:** Kaggle Notebooks
-- **Accelerator:** GPU T4 x2 (or P100). The models utilize 4-bit NormalFloat (nf4) quantization via `bitsandbytes` to fit within Kaggle's VRAM limits.
-
-## How to Run
-We highly recommend running the notebook using **Run All**. The notebook handles dependency installation (`qwen-vl-utils`, `transformers>=4.47.0`), dataset parsing, benchmark generation, and dual-evaluation automatically. The final cell generates a comparative Seaborn bar chart visualizing the accuracy improvements.
+1. **xView Dataset (Images & Annotations):** [https://www.kaggle.com/datasets/hassanmojab/xview-dataset](https://www.kaggle.com/datasets/hassanmojab/xview-dataset)
+2. **Project Weights & Results Cache:** [https://www.kaggle.com/datasets/mohammadaliabdullah/weights](https://www.kaggle.com/datasets/mohammadaliabdullah/weights)
 
 ## Authors
 - Muhammad Sheis Hussain
